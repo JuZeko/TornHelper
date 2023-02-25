@@ -15,6 +15,6 @@ namespace TornHelperBe.Controllers
         }
 
         [HttpGet]
-        public Task<TornPlayerStatus> Get() => _getUserData.GetUserDataAsync();
+        public Task<List<TornPlayerStatus?>> Get() => _getUserData.GetUserDataAsync();
     }
 }

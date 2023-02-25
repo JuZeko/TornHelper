@@ -2,6 +2,6 @@
 {
     public interface IGetUserDataService
     {
-        Task<TornPlayerStatus> GetUserDataAsync();
+        Task<List<TornPlayerStatus>> GetUserDataAsync();
     }
 }
