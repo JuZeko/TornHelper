@@ -1,25 +1,23 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace TornHelperBe.Services
 {
     public class GetUserDataService : IGetUserDataService
     {
+
+        private readonly List<string> notActivePlayersId = new List<string>() {"2883916", "298167", "879148", "251566", "2061354", "1999595", "507739", "534510", "430622" };
         public async Task<List<TornPlayerStatus>> GetUserDataAsync()
         {
             using var client = new HttpClient();
-            var response = await client.GetAsync("https://api.torn.com/user/2883916?selections=basic&key=VISkdWHmVOS680pT");
             List<TornPlayerStatus> tornPlayerStatusData = new List<TornPlayerStatus>();
-
             List<Task<string>> tasks = new List<Task<string>>();
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/298167?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/879148?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/251566?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/2061354?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/1999595?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/1776074?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/507739?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/534510?selections=basic&key=VISkdWHmVOS680pT"));
-            tasks.Add(GetUrlAsync("https://api.torn.com/user/430622?selections=basic&key=VISkdWHmVOS680pT"));
+
+            foreach (var playersId in notActivePlayersId)
+            {
+                tasks.Add(GetUrlAsync($"https://api.torn.com/user/{playersId}?selections=basic&key=VISkdWHmVOS680pT"));
+            }
+
             string[] results = await Task.WhenAll(tasks);
 
             foreach (string result in results)
