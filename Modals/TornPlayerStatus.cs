@@ -13,7 +13,7 @@
     {
         public int level { get; set; }
         public string? gender { get; set; }
-        public int playerId { get; set; }
+        public int player_id { get; set; }
         public string? name { get; set; }
         public PlayerDetailStatus? status { get; set; }
     }
