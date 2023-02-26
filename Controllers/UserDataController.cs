@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TornHelperBe.Modals;
 using TornHelperBe.Services;
 
 namespace TornHelperBe.Controllers
@@ -16,5 +17,9 @@ namespace TornHelperBe.Controllers
 
         [HttpGet]
         public Task<List<TornPlayerStatus?>> Get() => _getUserData.GetUserDataAsync();
+
+        [HttpGet]
+        [Route("stats")]
+        public Task<UserStats> GetUserStats() => _getUserData.GetUserStats();
     }
 }
